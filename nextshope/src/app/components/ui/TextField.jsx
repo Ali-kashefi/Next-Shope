@@ -8,7 +8,7 @@ function TextField({
   onChange,
   name,
   error,
-  label,
+  label,value
 }) {
   return (
     <>
@@ -19,6 +19,7 @@ function TextField({
         placeholder={placeholder}
         className={`focus:shadow-secondary-50 outline-none w-lg sm:w-sm md:w-md h-12 bg-primary-50 rounded-md text-secondary-900 text-center ${className}`}
         onChange={onChange}
+        value={value}
         {...rest}
       />
 
