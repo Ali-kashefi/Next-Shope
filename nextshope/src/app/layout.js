@@ -1,6 +1,7 @@
 import "./style/globals.css";
 import Header from "./components/Header";
 import { Toaster } from "react-hot-toast";
+import Provider from "./Provider";
 
 
 
@@ -18,10 +19,10 @@ export default function RootLayout({ children }) {
       <body
       >
         <div className="font-display">
-        <Toaster />
+          <Toaster />
 
           <Header />
-          {children}
+          <Provider>{children}</Provider>
         </div>
 
       </body>
