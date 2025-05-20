@@ -1,52 +1,74 @@
-"use client";
-import Button from "@/components/ui/Buttone";
-import TextField from "@/components/ui/TextField";
-import { useMutatecontroler } from "@/hook/useMutatecontriler";
-import { completeProfileAPI } from "@/service/postServices";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import toast from "react-hot-toast";
+"use client"; // Enables the Next.js component to run on the client side
+
+// Import necessary components and hooks
+import Button from "@/components/ui/Buttone"; // Button component
+import TextField from "@/components/ui/TextField"; // Text input field component
+import { useMutatecontroler } from "@/hook/useMutatecontriler"; // Custom mutation hook
+import { completeProfileAPI } from "@/service/postServices"; // API endpoint for profile completion
+import { useRouter } from "next/navigation"; // Next.js router hook for navigation
+import React, { useState } from "react"; // React and useState hook for state management
+import toast from "react-hot-toast"; // Toast notifications for success and error messages
 
 function Page() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const router = useRouter();
+  // 🔹 State variables for managing user inputs
+  const [name, setName] = useState(""); // Stores the user's name input
+  const [email, setEmail] = useState(""); // Stores the user's email input
+
+  const router = useRouter(); // Initialize the Next.js router for navigation
+
+  // 🔹 Setting up API mutation
   const { isLoading, error, mutate } = useMutatecontroler({
-    Api: completeProfileAPI,
+    Api: completeProfileAPI, // API endpoint for completing profile
   });
+
+  // Handler function for name input changes
   const nemaHndler = (e) => {
     setName(e.target.value);
   };
+
+  // Handler function for email input changes
   const emailHandler = (e) => {
     setEmail(e.target.value);
   };
 
-  const onSubmit =async (e) => {
-    e.preventDefault();
+  // 🔹 Form submission handler
+  const onSubmit = async (e) => {
+    e.preventDefault(); // Prevents page reload on form submission
+
+    // 🚀 Validate the name input
     if (name.length === 0) {
-      toast.error("نام و نام خانوادگی را وارد کنید");
+      toast.error("Please enter your full name");
     } else if (name.length < 6) {
-      toast.error("نام و نام خانوادگی باید بیشتر از 6 کاراکتر باشد");
+      toast.error("Full name must be at least 6 characters");
     }
 
+    // 🚀 Validate the email input
     if (email.length === 0) {
-      toast.error("ایمیل را وارد کنید");
+      toast.error("Please enter your email");
     } else if (email.length < 8) {
-      toast.error("ایمیل معتبر نیست");
-    }
-    if ( name.length < 6) {
-      return toast.error("نام و نام خانوادگی باید بیشتر از 6 کاراکتر باشد");
+      toast.error("Invalid email address");
     }
 
-    if ( email.length < 8) {
-      return toast.error("ایمیل معتبر نیست");
+    // 🚀 Ensure the input is valid before making API request
+    if (name.length < 6) {
+      return toast.error("Full name must be at least 6 characters");
+    }
+
+    if (email.length < 8) {
+      return toast.error("Invalid email address");
     }
 
     try {
-      const {message} = await mutate({ name, email });
+      // Make an API request to complete the profile
+      const { message } = await mutate({ name, email });
+
+      // Show success message using toast notification
       toast.success(message);
+
+      // Redirect the user to the homepage
       router.push("/");
     } catch (err) {
+      // Display error message if API request fails
       toast.error(error.response.data.message);
     }
   };
@@ -54,33 +76,37 @@ function Page() {
   return (
     <div className="flex flex-row justify-center">
       <div className="flex flex-col items-center ">
+        {/* 📌 Registration Form */}
         <form onSubmit={onSubmit}>
           <div className="form sm:w-sm lg:w-lg xl:w-xl 2xl:w-2xl">
+            {/* 🔹 Name input field */}
             <TextField
               type="text"
-              placeholder="نام خود را وارد کنید"
-              label="نام:"
+              placeholder="Enter your name"
+              label="Name:"
               name="name"
               value={name}
               onChange={nemaHndler}
-     
             />
+
+            {/* 🔹 Email input field */}
             <TextField
               className="bg-primary-50 "
-              label="ایمیل"
-              placeholder="ایمیل خود را وارد کنید"
+              label="Email"
+              placeholder="Enter your email"
               name="email"
               type="email"
               onChange={emailHandler}
               value={email}
-     
             />
+
+            {/* 🔹 Submit button */}
             <Button
               onClick={onSubmit}
               isloading={isLoading}
-              className="h-12 w-full "
+              className="h-12 w-full"
             >
-              ثبت نام
+              Sign Up
             </Button>
           </div>
         </form>
@@ -89,4 +115,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Page; // 📌 Exporting the `Page` component
