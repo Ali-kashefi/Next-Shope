@@ -1,51 +1,51 @@
 import React, { useState } from "react";
-import OTPInput from "react-otp-input"; // Library for handling OTP input
-import Button from "@/components/ui/Buttone"; // Custom button component
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"; // Icon for back navigation
+import OTPInput from "react-otp-input";
+import Button from "@/components/ui/Buttone"; 
+import { ArrowLeftIcon } from "@heroicons/react/24/solid"; 
 
-// Component for OTP verification
+
 function CheackOTP({
-  onSubmit, // Function to submit OTP
-  phonenumber, // User's phone number
-  otp, // OTP input value
-  setOtp, // State function to update OTP
-  onback, // Function to go back to previous step
-  time, // Countdown timer for OTP expiration
-  onResend, // Function to resend OTP
+  onSubmit,
+  phonenumber, 
+  otp, 
+  setOtp, 
+  onback, 
+  time,
+  onResend, 
 }) {
   return (
     <div className="flex justify-center h-dvh pt-10">
-      {/* Form for OTP verification */}
+      
       <form
         onSubmit={onSubmit}
         className="flex flex-col items-center gap-6"
       >
         <div className="flex pt-10 flex-col w-md items-center gap-6 shadow-lg p-6 md:gap-4 bg-white rounded-lg h-1/2">
-          {/* Message showing the phone number where OTP was sent */}
+    
           <p className="text-secondary-900 text-md">
-            OTP sent to {phonenumber}
+            کد تایید به شماره {phonenumber} ارسال شد.
           </p>
           <p className="text-secondary-900 text-md">
-            Please enter the received OTP
+            لطفاً کد دریافتی را وارد کنید.
           </p>
 
-          {/* Option to go back if phone number is incorrect */}
+      
           <div className="flex flex-row-reverse">
-            <p className="text-xs">Is this number incorrect?</p>
+            <p className="text-xs">شماره اشتباه است؟</p>
             <button onClick={onback} className="text-primary-800">
               <ArrowLeftIcon
                 width={15}
-                height={15} // Fixed typo: "hanging" → "height"
+                height={15} 
                 color="rgb(--color-primary-800)"
               />
             </button>
           </div>
 
-          {/* OTP Input Field */}
+    
           <OTPInput
             value={otp}
             onChange={setOtp}
-            numInputs={6} // Expecting a 6-digit OTP
+            numInputs={6} 
             renderSeparator={<span>-</span>}
             renderInput={(props) => <input {...props} />}
             inputStyle={{
@@ -57,17 +57,17 @@ function CheackOTP({
             containerStyle="flex gap-x-2 justify-center"
           />
 
-          {/* Submit button to verify OTP */}
+      
           <Button onClick={onSubmit} className="w-lg sm:w-sm md:w-sm h-12">
-            Submit
+            تایید
           </Button>
 
-          {/* Countdown timer for OTP resend */}
+
           <div>
             {time > 0 ? (
-              <p>({time}) seconds remaining for OTP resend</p>
+              <p>({time}) ثانیه تا ارسال مجدد کد</p>
             ) : (
-              <button onClick={onResend}>Resend OTP</button>
+              <button onClick={onResend}>ارسال مجدد کد</button>
             )}
           </div>
         </div>
@@ -76,4 +76,4 @@ function CheackOTP({
   );
 }
 
-export default CheackOTP; // Exporting the OTP verification component
+export default CheackOTP; 
