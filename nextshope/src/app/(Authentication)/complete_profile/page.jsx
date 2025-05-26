@@ -83,7 +83,7 @@ function Page() {
             <TextField
               type="text"
               placeholder="Enter your name"
-              label="Name:"
+              label="نام:"
               name="name"
               value={name}
               onChange={nemaHndler}
@@ -92,7 +92,7 @@ function Page() {
             {/* 🔹 Email input field */}
             <TextField
               className="bg-primary-50 "
-              label="Email"
+              label="ایمیل:"
               placeholder="Enter your email"
               name="email"
               type="email"
@@ -106,7 +106,7 @@ function Page() {
               isloading={isLoading}
               className="h-12 w-full"
             >
-              Sign Up
+            ارسال
             </Button>
           </div>
         </form>
