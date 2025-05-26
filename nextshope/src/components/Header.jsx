@@ -1,66 +1,73 @@
 "use client";
-import { getUserProfileAPI } from "@/service/postServices";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-import { useQuery } from "@tanstack/react-query";
+import useGetUser from "@/hook/useGetUser";
+
 import Link from "next/link";
 import React from "react";
 
 function Header() {
-  const { error, isLoading, data } = useQuery({
-    queryKey: ["user"],
-    queryFn: getUserProfileAPI,
-    retry: false,
-    refetchOnWindowFocus: true,
-  });
-  console.log(data, error, isLoading);
-  const { user, cart } = data || {};
+ 
+  const {user,isLoading,cart}=useGetUser()
 
   return (
     <>
-     <header
-      className={`shadow-md mb-10 sticky top-0 transition-all duration-200 bg-white px-12 ${
-        isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"
-      }`}
-    >
-      <nav>
-        <ul className="flex items-center  justify-between py-2 container xl:max-w-screen-xl">
-          <li>
-            <Link className="block py-2" href="/">
-              خانه
-            </Link>
-          </li>
-          <li>
-            <Link className="block py-2" href="/products">
-              محصولات
-            </Link>
-          </li>
-          <li>
-            <Link className="block py-2" href="/profile">
-              پنل کاربر
-            </Link>
-          </li>
-          <li>
-            <Link className="block py-2" href="/admin">
-              پنل ادمین
-            </Link>
-          </li>
-          <li>
-            <Link className="block py-2" href="/cart">
-              سبد خرید ({cart ? cart.payDetail.productIds.length : 0})
-            </Link>
-          </li>
-          {user ? (
-            <span>{user.name}</span>
-          ) : (
-            <li>
-              <Link className="block py-2" href="/auth">
-                ورود
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+    <header
+  className={`shadow-lg sticky top-0 transition-all duration-300 bg-white px-8 md:px-16 lg:px-24 ${
+    isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"
+  }`}
+>
+  <nav className="container mx-auto">
+    <ul className="flex items-center justify-between py-3 text-secondary-900 font-medium">
+      
+      {/* Left side - Logo/Home */}
+      <li className="text-lg font-bold text-primary-600 hover:text-primary-700 transition-all">
+        <Link href="/">خانه</Link>
+      </li>
+
+      {/* Middle - Navigation links */}
+      <div className="hidden md:flex space-x-8">
+        <li>
+          <Link className="hover:text-primary-600 transition-all" href="/products">
+            محصولات
+          </Link>
+        </li>
+        <li>
+          <Link className="hover:text-primary-600 transition-all" href="/profile">
+            پنل کاربر
+          </Link>
+        </li>
+        <li>
+          <Link className="hover:text-primary-600 transition-all" href="/dashboared">
+            پنل ادمین
+          </Link>
+        </li>
+        <li>
+          <Link className="relative flex items-center hover:text-primary-600 transition-all" href="/cart">
+            سبد خرید
+            {cart && cart.payDetail.productIds.length > 0 && (
+              <span className="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                {cart.payDetail.productIds.length}
+              </span>
+            )}
+          </Link>
+        </li>
+      </div>
+
+      {/* Right Side - User/Login */}
+      <li className="flex items-center space-x-4">
+        {user ? (
+       
+          <Link href="/profile">   <span className="text-primary-800 font-semibold">{user.name}</span></Link>
+        ) : (
+          <Link className="hover:text-primary-600 transition-all" href="/auth">
+            ورود
+          </Link>
+        )}
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
 
     </>
   );
