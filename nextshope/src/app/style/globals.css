@@ -38,8 +38,8 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  
+ 
   --font-display: "Vazir", sans-serif;
 }
 :root {
@@ -99,7 +99,51 @@
   font-family: var(--font-vazir);
 }
 body {
-  background: var(--background);
-  color: var(--foreground);
+
+
   font-family: Arial, Helvetica, sans-serif;
+}
+.form{
+ 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 4rem 3rem;
+    border-radius: 0.5rem; 
+
+}
+@layer components{
+  .table___th{
+     @apply border-b-2 border-primary-300 bg-primary-100 text-primary-800
+           font-bold p-4 pr-6 text-right uppercase tracking-wider;
+  }
+  .table___td{
+    @apply border-b border-gray-200 text-gray-700
+           font-normal p-3 pr-6 text-right leading-relaxed;
+  }
+ 
+
+
+  .responsive-table {
+    @apply hidden md:table; 
+  }
+
+  .responsive-cards {
+    @apply md:hidden grid grid-cols-1 gap-4;  
+  }
+
+  .responsive-card-item {
+    @apply bg-white p-4 rounded-lg shadow-md border border-gray-200;
+  }
+
+  .responsive-card-label {
+    @apply font-bold text-gray-600 text-sm mb-1;
+  }
+
+  .responsive-card-value {
+    @apply text-gray-800 text-base;
+  }
+
 }

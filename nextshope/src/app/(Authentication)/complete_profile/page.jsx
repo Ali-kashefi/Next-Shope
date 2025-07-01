@@ -4,7 +4,8 @@
 import Button from "@/components/ui/Buttone"; // Button component
 import TextField from "@/components/ui/TextField"; // Text input field component
 import { useMutatecontroler } from "@/hook/useMutatecontriler"; // Custom mutation hook
-import { completeProfileAPI } from "@/service/postServices"; // API endpoint for profile completion
+import { completeProfileAPI } from "@/service/ServicesMethode"; // API endpoint for profile completion
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation"; // Next.js router hook for navigation
 import React, { useState } from "react"; // React and useState hook for state management
 import toast from "react-hot-toast"; // Toast notifications for success and error messages
@@ -13,7 +14,7 @@ function Page() {
   // 🔹 State variables for managing user inputs
   const [name, setName] = useState(""); // Stores the user's name input
   const [email, setEmail] = useState(""); // Stores the user's email input
-
+  const queryclient = useQueryClient();
   const router = useRouter(); // Initialize the Next.js router for navigation
 
   // 🔹 Setting up API mutation
@@ -67,6 +68,7 @@ function Page() {
 
       // Redirect the user to the homepage
       router.push("/");
+      queryclient.invalidateQueries({ queryKey: ["get-user"] });
     } catch (err) {
       // Display error message if API request fails
       toast.error(error.response.data.message);
@@ -106,7 +108,7 @@ function Page() {
               isloading={isLoading}
               className="h-12 w-full"
             >
-            ارسال
+              ارسال
             </Button>
           </div>
         </form>

@@ -4,7 +4,7 @@
 import CheackOTP from "@/components/CheackOTP"; // OTP verification component
 import SendITPForm from "@/components/SendITPForm"; // OTP sending form component
 import { useMutatecontroler } from "@/hook/useMutatecontriler"; // Custom mutation hook for API calls
-import { cheackOTPAPI, sendOTPAPI } from "@/service/postServices"; // API endpoints for sending and checking OTP
+import { cheackOTPAPI, sendOTPAPI } from "@/service/ServicesMethode"; // API endpoints for sending and checking OTP
 import { useRouter } from "next/navigation"; // Next.js router for navigation
 import React, { useEffect, useState } from "react"; // React hooks for state and effects
 import toast from "react-hot-toast"; // Toast notifications for success and error messages

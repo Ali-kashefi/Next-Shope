@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Buttone";
 import TextField from "@/components/ui/TextField";
 import useGetUser from "@/hook/useGetUser";
-import { updateProfileAPI } from "@/service/postServices";
+import { updateProfileAPI } from "@/service/ServicesMethode";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -46,6 +46,7 @@ function Page() {
       const { message } = await mutateAsync(formData);
       queryClient.invalidateQueries({ queryKey: ["get-user"] });
       toast.success(message);
+      
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

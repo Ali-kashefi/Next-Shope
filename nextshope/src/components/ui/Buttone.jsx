@@ -1,10 +1,10 @@
 import Spiner from "./Spiner";
 
-function Button({ children, btnType, onClick, disabled, className, props,isLoading }) {
+function Button({ children, btnType, onClick, disabled, className, props,isLoading,styldisable }) {
   
   return (
     <button
-      className={`   bg-primary-900  hover:bg-primary-600  rounded-lg  text-primary-50  ${className}`}
+      className={styldisable?"": `   bg-primary-900  hover:bg-primary-600  rounded-lg  text-primary-50  ${className}`}
       onClick={onClick}
       disabled={disabled}
       {...props}

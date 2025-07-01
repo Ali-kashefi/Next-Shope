@@ -5,7 +5,7 @@
     "@/style/*":["style/*"],
     "@/constants/*":["constants/*"],
     "@/components/*":["components/*"],
-    "@/ui/*":["ui/*"],
+    // "@/ui/*":["ui/*"],
     "@/hook/*":["hook/*"],
     "@/service/*":["services/*"],
     "@/providers/*": ["./src/providers/*"]
