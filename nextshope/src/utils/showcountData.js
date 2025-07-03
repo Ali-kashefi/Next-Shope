@@ -1,4 +1,4 @@
-// service/showCountData.js (یا هر جایی که showCountData رو تعریف کردید)
+
 import { getAllPaymentsAPI, getallProductsAPI, getallusersAPI } from "@/service/ServicesMethode";
 import setCookiesOnReq from "./setCookiesOnReq";
 import { cookies } from "next/headers";

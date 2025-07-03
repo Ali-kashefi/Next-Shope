@@ -1,4 +1,7 @@
 "use client";
+//Initially, the intended user converts their information into a presentation and the desired 
+// information is included for display by ForH and sent to the text field component as a prop function.
+//  If the form is submitted, the browser cache is updated. The use state is used to submit the form.
 import Button from "@/components/ui/Buttone";
 import TextField from "@/components/ui/TextField";
 import useGetUser from "@/hook/useGetUser";

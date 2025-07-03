@@ -46,6 +46,7 @@
   --font-display: "Vazir", sans-serif;
   
 }
+/*Add color palettes with variables and add some styles for custom classes*/
 @theme{
   --background-app-rgb: 249, 250, 251;
   --color-primary-900: rgb(74, 109, 255);

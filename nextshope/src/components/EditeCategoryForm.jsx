@@ -1,3 +1,5 @@
+//Edit categories using the Select library to make existing categories accessible and visible.
+//  Provide types to specify types that can be processed on the server and expected by the user.
 import React from "react";
 import Button from "@/components/ui/Buttone";
 import TextField from "@/components/ui/TextField";

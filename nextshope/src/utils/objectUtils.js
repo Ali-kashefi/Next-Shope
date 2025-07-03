@@ -1,3 +1,4 @@
+// Include viewable fields from object
 export function includeObj(obj, includesKey) {
  
   const newObj = {};

@@ -1,5 +1,5 @@
 "use client";
-
+// Using the ChartJS library and processing input data with the Props function
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {

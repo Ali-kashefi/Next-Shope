@@ -22,7 +22,7 @@ function Page() {
         user.name.toLowerCase().includes(lowerCaseQuery) ||
         user.email.toLowerCase().includes(lowerCaseQuery)||
          user.phoneNumber.toLowerCase().includes(lowerCaseQuery)
-          // user.email.toLowerCase().includes(lowerCaseQuery)
+
       );
     }) || [];
 

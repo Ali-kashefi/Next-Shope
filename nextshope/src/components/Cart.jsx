@@ -1,5 +1,7 @@
 "use client";
-
+//User shopping cart and calculating discount price and final price.
+//  Use of mutation controller which is a custom hook and is used to send information to the server and process errors.
+//  Use of image component to make the component dynamic.
 import React from "react";
 import Image from "next/image";
 import { formatPrice } from "utils/priceFornater";

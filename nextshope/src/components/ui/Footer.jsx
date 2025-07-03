@@ -1,5 +1,5 @@
 import React from "react";
-
+// Site footer with added copyright
 function Footer() {
   return (
     <footer className="bg-secondary-900 text-secondary-100 py-6">

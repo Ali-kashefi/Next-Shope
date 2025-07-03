@@ -13,15 +13,13 @@ function UsersTable() {
 
   const [users, setUsers] = useState([]);
   const [hasFetchedUsers, setHasFetchedUsers] = useState(false);
-  const [usersListError, setUsersListError] = useState(null); // اضافه کردن این برای نمایش خطا
+  const [usersListError, setUsersListError] = useState(null); 
 
-  // --- useEffect هم باید اینجا باشه ---
+
   useEffect(() => {
-    // این `useEffect` فقط وقتی `currentUserRole` ادمین شد و هنوز داده‌ها فچ نشده بودند، اجرا میشه.
-    // `!isUserLoading` رو هم اضافه کردیم که مطمئن بشیم اطلاعات نقش کاربر کاملاً لود شده.
     if (currentUserRole === "ADMIN" && !hasFetchedUsers && !isUserLoading) {
       const fetchUsersData = async () => {
-        setUsersListError(null); // پاک کردن خطاهای قبلی قبل از فچ جدید
+        setUsersListError(null);
         try {
           const { data } = await getallusersAPI();
           console.log(data);
@@ -29,21 +27,18 @@ function UsersTable() {
           setHasFetchedUsers(true);
         } catch (err) {
           console.error("Error fetching users list:", err);
-          setUsersListError(err.message || "خطا در دریافت لیست کاربران"); // ذخیره پیام خطا
+          setUsersListError(err.message || "خطا در دریافت لیست کاربران"); 
         }
       };
       fetchUsersData();
     }
-  }, [currentUserRole, hasFetchedUsers, isUserLoading]); // وابستگی‌ها رو دقیق مشخص کنید
-
-  // --- حالا می‌توانید منطق رندرینگ مشروط را قرار دهید ---
-
-  // 1. اگر هنوز اطلاعات کاربر لود نشده باشد، اسپینر را نمایش دهید.
+  }, [currentUserRole, hasFetchedUsers, isUserLoading]);
+ 
   if (isUserLoading) {
     return <Spiner />;
   }
 
-  // 2. اگر کاربر ادمین نباشد، پیام عدم دسترسی را نمایش دهید.
+ 
   if (currentUserRole !== "ADMIN") {
     return (
       <div className="text-red-500 text-center mt-8">
@@ -52,17 +47,16 @@ function UsersTable() {
     );
   }
 
-  // 3. اگر خطایی در واکشی لیست کاربران داشتیم، پیام خطا را نمایش دهید.
+
   if (usersListError) {
     return <div className="text-red-500 text-center mt-8">خطا در بارگذاری لیست کاربران: {usersListError}</div>;
   }
 
-  // 4. اگر هنوز داده‌ها فچ نشده و لیست کاربران خالی است (یعنی در حال لود شدن لیست کاربران هستیم)
+
   if (!hasFetchedUsers) { 
-    return <Spiner />; // یا هر پیام لودینگ دیگری برای لیست کاربران
+    return <Spiner />; 
   }
-  
-  // 5. اگر داده‌ها فچ شده ولی لیست کاربران خالی است (یعنی نتیجه‌ای یافت نشد)
+   
   if (users.length === 0) {
     return (
       <div className="text-gray-600 text-center mt-8">
@@ -71,7 +65,6 @@ function UsersTable() {
     );
   }
 
-  // --- آماده‌سازی داده‌ها برای جدول (فقط اگر کاربران وجود داشتند) ---
   const tHeader = [
     "#",
     "نام کاربر",

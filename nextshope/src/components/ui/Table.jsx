@@ -1,5 +1,7 @@
 import React from "react";
-
+// At the entrance of this table,
+//  two representations of the header and body of this table are received,
+//  which do not require any arguments and all the work is done here.
 function Table({ tHeader, tBody }) {
   return (
     <div className="overflow-x-auto rounded-lg shadow-md">

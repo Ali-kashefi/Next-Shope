@@ -1,5 +1,5 @@
 import React from "react";
-
+// Ability to display errors and label dynamic value naming and editing
 function TextField({
   type = "text",
   placeholder = "",
@@ -9,7 +9,7 @@ function TextField({
   error,
   label,
   value,
-  validaitionMessage = { emptyms: "", notveryfidems: "" },
+
   disabled,
 }) {
   return (

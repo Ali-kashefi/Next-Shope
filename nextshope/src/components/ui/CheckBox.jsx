@@ -1,4 +1,4 @@
-
+// Dynamic checkbox component with labeling capability and convenient, repeated use
 
 function CheckBox({ id, name, value, onChange, checked, label }) {
   

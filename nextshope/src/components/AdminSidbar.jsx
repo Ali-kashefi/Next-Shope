@@ -22,7 +22,6 @@ function AdminSidebar() {
   return (
     <div className="w-72 fixed bg-gray-50 p-6 shadow-2xl rounded-l-3xl flex flex-col h-screen">
       {" "}
-
       <h1 className=" font-extrabold text-secondary-800 border-b border-gray-700 pb-2">
         پنل مدریت
       </h1>
@@ -33,11 +32,9 @@ function AdminSidebar() {
             className="flex items-center p-3 rounded-xl hover:bg-primary-800 transition-all duration-200 transform hover:scale-105"
           >
             <HomeIcon className="w-6 h-6 ml-3 text-secondary-600 group-hover:text-secondary-400 transition-colors duration-200" />{" "}
-
             <span className="text-lg font-medium text-primary-800 group-hover:text-primary-200">
               صفحه اصلی
             </span>{" "}
-
           </Link>
         </li>
 

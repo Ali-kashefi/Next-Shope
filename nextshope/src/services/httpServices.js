@@ -1,3 +1,8 @@
+//In this code that uses Axios,
+//  a base address has been assigned and it has the ability to automatically
+//  log in the user using the access token when their cookies expire so that the user does not need to log in
+//  again. The required REST API methods have been assigned to make the task easier.
+//  This code has the ability to register cookies automatically.
 import axios from "axios";
 const app = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,

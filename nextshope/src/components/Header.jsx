@@ -1,4 +1,6 @@
 "use client";
+// The site header displays the number of items and the user's 
+// name if there is a user and a shopping cart.
 import useGetUser from "@/hook/useGetUser";
 
 import Link from "next/link";

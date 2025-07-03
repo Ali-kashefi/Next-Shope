@@ -1,3 +1,5 @@
+//Checking the OTP code if it is correct, going to the next step using the dynamic button component,
+//  and the ability to return to the previous step if the number is incorrect
 import React, { useState } from "react";
 import OTPInput from "react-otp-input";
 import Button from "@/components/ui/Buttone"; 

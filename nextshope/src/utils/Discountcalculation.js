@@ -1,3 +1,5 @@
+//This code is responsible for receiving the original price and discount percentage,
+//  and finally calculates it with Regular Expression on the client side and returns it.
 export function Discountcalculation(inputString) {
 
   const convertPersianDigitsToEnglish = (str) => {

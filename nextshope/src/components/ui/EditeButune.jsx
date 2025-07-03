@@ -1,3 +1,4 @@
+// This component provides buttons for use in tables that need to be edited or deleted.
 import React from 'react'
 import Button from './Buttone';
 import Link from 'next/link';

@@ -1,26 +1,24 @@
-// "use client";
-import React  from "react";
+// Create a product with select libraries to display existing categories and tag libraries
+// to add dynamic tags and use text field and button components for a more dynamic user experience and
+//  submit
+// the form with form data and use table components for a dynamic table
+import React from "react";
 import TextField from "./ui/TextField";
 import Button from "./ui/Buttone";
 import Select from "react-select";
 import { TagsInput } from "react-tag-input-component";
 
-
 function PrpductForm({
   allcategories,
- categories,
+  categories,
   setCategpries,
   tags,
   setTags,
   productDataOnChange,
   productform,
-   submiteForm,
-   isLoading
+  submiteForm,
+  isLoading,
 }) {
- 
-
-  
-
   const ProductsFormData = [
     {
       id: 1,
@@ -64,30 +62,24 @@ function PrpductForm({
       placeholder: "تخفیف محصول",
       type: "text",
     },
+
     {
       id: 7,
-      name: "offPrice",
-      lable: "قیمت روی تخفیف",
-      placeholder: "قیمت تخفیف خورده",
-      type: "text",
-    },
-    {
-      id: 8,
       name: "countInStock",
       lable: " موجودی اولیه ",
       placeholder: "موجودی فعلی  ",
       type: "text",
     },
     {
-      id: 9,
+      id: 8,
       name: "imageLink",
       lable: " عکس محصول ",
       placeholder: "  لینک عکس محصول را وارد کنید ",
       type: "text",
     },
   ];
-  if(isLoading){
-    return <div>loading</div>
+  if (isLoading) {
+    return <div>loading</div>;
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
@@ -95,23 +87,23 @@ function PrpductForm({
         <h2 className="text-3xl font-bold text-center mb-8 text-blue-700">
           ایجاد محصول جدید
         </h2>
-        <form className="space-y-6" onSubmit={ submiteForm}>
+        <form className="space-y-6" onSubmit={submiteForm}>
           {ProductsFormData.map((item) => (
             <TextField
               key={item.id}
               label={item.lable}
               name={item.name}
-              placeholder={ item.placeholder}
+              placeholder={item.placeholder}
               value={productform[item.name]}
-              onChange={  productDataOnChange}
+              onChange={productDataOnChange}
               type={item.type}
               className="w-full px-4 py-3 text-right border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               labelClassName="block text-gray-700 text-sm font-medium mb-2"
             />
           ))}
-          <label >دسته بندی </label>
+          <label>دسته بندی </label>
           <Select
-          value={categories}
+            value={categories}
             onChange={setCategpries}
             options={allcategories}
             getOptionLabel={(option) => option.title}
@@ -120,18 +112,17 @@ function PrpductForm({
             placeholder="دسته بندی محصول "
             className="w-full text-center px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <label >تگ محصول </label>
+          <label>تگ محصول </label>
           <TagsInput
             value={tags}
             onChange={setTags}
-            
             name="tags"
             placeHolder="تگ محصول"
             classNames="w-full px-4 py-3  text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <div className="flex justify-end">
-            <Button 
-            onClick={ submiteForm}
+            <Button
+              onClick={submiteForm}
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >

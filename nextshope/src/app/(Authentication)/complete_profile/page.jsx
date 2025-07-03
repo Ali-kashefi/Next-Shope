@@ -1,76 +1,63 @@
-"use client"; // Enables the Next.js component to run on the client side
+"use client";
 
-// Import necessary components and hooks
-import Button from "@/components/ui/Buttone"; // Button component
-import TextField from "@/components/ui/TextField"; // Text input field component
-import { useMutatecontroler } from "@/hook/useMutatecontriler"; // Custom mutation hook
-import { completeProfileAPI } from "@/service/ServicesMethode"; // API endpoint for profile completion
+import Button from "@/components/ui/Buttone";
+import TextField from "@/components/ui/TextField";
+import { useMutatecontroler } from "@/hook/useMutatecontriler";
+import { completeProfileAPI } from "@/service/ServicesMethode";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation"; // Next.js router hook for navigation
-import React, { useState } from "react"; // React and useState hook for state management
-import toast from "react-hot-toast"; // Toast notifications for success and error messages
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 function Page() {
-  // 🔹 State variables for managing user inputs
-  const [name, setName] = useState(""); // Stores the user's name input
-  const [email, setEmail] = useState(""); // Stores the user's email input
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const queryclient = useQueryClient();
-  const router = useRouter(); // Initialize the Next.js router for navigation
+  const router = useRouter();
 
-  // 🔹 Setting up API mutation
   const { isLoading, error, mutate } = useMutatecontroler({
-    Api: completeProfileAPI, // API endpoint for completing profile
+    Api: completeProfileAPI,
   });
 
-  // Handler function for name input changes
   const nemaHndler = (e) => {
     setName(e.target.value);
   };
 
-  // Handler function for email input changes
   const emailHandler = (e) => {
     setEmail(e.target.value);
   };
 
-  // 🔹 Form submission handler
   const onSubmit = async (e) => {
-    e.preventDefault(); // Prevents page reload on form submission
+    e.preventDefault();
 
-    // 🚀 Validate the name input
     if (name.length === 0) {
-      toast.error("Please enter your full name");
+      toast.error("لطفاً نام کامل خود را وارد کنید");
     } else if (name.length < 6) {
-      toast.error("Full name must be at least 6 characters");
+      toast.error("نام کامل باید حداقل ۶ کاراکتر باشد");
     }
 
-    // 🚀 Validate the email input
     if (email.length === 0) {
-      toast.error("Please enter your email");
+      toast.error("لطفاً ایمیل خود را وارد کنید");
     } else if (email.length < 8) {
-      toast.error("Invalid email address");
+      toast.error("آدرس ایمیل نامعتبر است");
     }
 
-    // 🚀 Ensure the input is valid before making API request
     if (name.length < 6) {
-      return toast.error("Full name must be at least 6 characters");
+      return toast.error("نام کامل باید حداقل ۶ کاراکتر باشد");
     }
 
     if (email.length < 8) {
-      return toast.error("Invalid email address");
+      return toast.error("آدرس ایمیل نامعتبر است");
     }
 
     try {
-      // Make an API request to complete the profile
       const { message } = await mutate({ name, email });
 
-      // Show success message using toast notification
       toast.success(message);
 
-      // Redirect the user to the homepage
       router.push("/");
       queryclient.invalidateQueries({ queryKey: ["get-user"] });
     } catch (err) {
-      // Display error message if API request fails
       toast.error(error.response.data.message);
     }
   };
@@ -78,31 +65,27 @@ function Page() {
   return (
     <div className="flex flex-row justify-center">
       <div className="flex flex-col items-center ">
-        {/* 📌 Registration Form */}
         <form onSubmit={onSubmit}>
           <div className="form sm:w-sm lg:w-lg xl:w-xl 2xl:w-2xl">
-            {/* 🔹 Name input field */}
             <TextField
               type="text"
-              placeholder="Enter your name"
+              placeholder="نام خود را وارد کنید"
               label="نام:"
               name="name"
               value={name}
               onChange={nemaHndler}
             />
 
-            {/* 🔹 Email input field */}
             <TextField
               className="bg-primary-50 "
               label="ایمیل:"
-              placeholder="Enter your email"
+              placeholder="ایمیل خود را وارد کنید"
               name="email"
               type="email"
               onChange={emailHandler}
               value={email}
             />
 
-            {/* 🔹 Submit button */}
             <Button
               onClick={onSubmit}
               isloading={isLoading}
@@ -117,4 +100,4 @@ function Page() {
   );
 }
 
-export default Page; // 📌 Exporting the `Page` component
+export default Page;

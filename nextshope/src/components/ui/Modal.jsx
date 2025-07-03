@@ -1,4 +1,6 @@
 "use client";
+// Modal site with dynamic texts and two buttons 
+// to confirm or reject the display message, opening and closing occurs by the props function.
 import React from "react";
 import { createPortal } from "react-dom";
 import { ExclamationCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
