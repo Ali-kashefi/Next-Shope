@@ -17,6 +17,7 @@ function ProductCart({ src, title, description, price, date, product }) {
                     layout="responsive"
                     objectFit="contain"
                     className="rounded-lg border border-primary-200"
+                    quality={100}
                   />
                 </div>
         </Link>

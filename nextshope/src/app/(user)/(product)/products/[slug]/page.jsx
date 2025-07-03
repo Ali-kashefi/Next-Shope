@@ -37,6 +37,7 @@ async function  Productslug({ params }) {
                          layout="responsive"
                          objectFit="contain"
                          className="rounded-lg border border-primary-200"
+                         quality={100}
                        />
                      </div>
 
