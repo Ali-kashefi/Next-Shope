@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import { formatPrice } from "utils/priceFornater";
@@ -9,7 +10,7 @@ import {
 } from "@/service/ServicesMethode";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import Like from "./ui/Like";
+
 
 export default function CartItem({ product }) {
   const { isLoading: removeloading, mutate: mutateremovefromcart } =
@@ -22,6 +23,11 @@ export default function CartItem({ product }) {
     }
   );
   const queryclient = useQueryClient();
+
+  
+  const actualOffPricePerUnit = product.quantity > 0 ? product.offPrice / product.quantity : product.offPrice;
+  const actualPricePerUnit = product.quantity > 0 ? product.price / product.quantity : product.price;
+
 
   const removecarthandler = async () => {
     try {
@@ -57,6 +63,7 @@ export default function CartItem({ product }) {
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
+            quality={100}
           />
         </div>
         <div className="flex flex-col flex-grow">
@@ -65,7 +72,8 @@ export default function CartItem({ product }) {
           </h3>
           {product.discount && product.discount > 0 && (
             <span className="text-error font-medium text-sm sm:text-base">
-              {formatPrice(product.discount)}% تخفیف
+           
+              {product.discount}% تخفیف
             </span>
           )}
         </div>
@@ -93,14 +101,16 @@ export default function CartItem({ product }) {
         </div>
 
         <div className="flex flex-col items-end sm:items-start mb-2 sm:mb-0">
+  
           {product.discount > 0 && (
             <span className="text-secondary-500 line-through">
-              {formatPrice(product.price)}
+              {formatPrice(actualPricePerUnit)}
               <span className="text-xs"> تومان</span>
             </span>
           )}
+ 
           <span className="font-bold text-primary-800">
-            {formatPrice(product.offPrice)}
+            {formatPrice(actualOffPricePerUnit)}
             <span className="text-xs"> تومان</span>
           </span>
         </div>
@@ -108,7 +118,8 @@ export default function CartItem({ product }) {
 
       <div className="flex flex-col items-end text-lg font-bold text-secondary-900">
         <span>
-          {formatPrice(product.offPrice * product.quantity)}
+
+          {formatPrice(actualOffPricePerUnit * product.quantity)}
           <span className="text-sm"> تومان</span>
         </span>
       </div>
