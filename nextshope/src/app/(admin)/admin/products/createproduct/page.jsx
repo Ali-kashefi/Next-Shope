@@ -16,10 +16,10 @@ function page() {
     description: "",
     slug: "",
     brand: "",
-    price: "",
-    offPrice: "",
-    discount: "",
-    countInStock: "",
+    price: 0,
+    offPrice: 0,
+    discount: 0,
+    countInStock: 0,
     imageLink: "",
   });
   const {
@@ -46,7 +46,7 @@ function page() {
       });
       toast.success(message);
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+toast.error(error?.response?.data?.message);
     }
   };
   return (
