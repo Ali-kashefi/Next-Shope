@@ -53,8 +53,8 @@ export function createpeymentAPI() {
 export function likeAPI(id) {
   return http.post(`/product/like/${id}`).then(({ data }) => data.data);
 }
-export function getallusersAPI() {
-  return http.get(`/admin/user/list`).then(({ data }) => data.data);
+export function getallusersAPI(option) {
+  return http.get(`/admin/user/list`,option).then(({ data }) => data.data);
 
 }
 
@@ -96,8 +96,8 @@ export function removeCategoryAPI({id}) {
 export function getCategoryByIdAPI(id) {
   return http.get(`/category/${id}`).then(({ data }) => data.data);
 }
-export function getAllPaymentsAPI() {
-  return http.get("/admin/payment/list").then(({ data }) => data.data);
+export function getAllPaymentsAPI(option) {
+  return http.get("/admin/payment/list",option).then(({ data }) => data.data);
 }
 
 
