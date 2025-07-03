@@ -1,8 +1,9 @@
-
 import "../style/globals.css";
 import { Toaster } from "react-hot-toast";
 import Provider from "../Provider";
 import Header from "@/components/Header";
+import Footer from "@/components/ui/Footer";
+
 export const metadata = {
   title: {
     template: '%s|نکست شاپ ',
@@ -14,17 +15,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body
 
-      >
-        <div className="font-display">
+      <body className="flex flex-col min-h-screen">
+        <div className="font-display flex flex-col flex-1">
           <Toaster />
           <Provider>
             <Header />
-            {children}
-            </Provider>
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </Provider>
         </div>
-
       </body>
     </html>
   );
