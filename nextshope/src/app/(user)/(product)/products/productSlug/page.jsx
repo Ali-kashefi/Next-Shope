@@ -8,15 +8,21 @@ import ProductSort from "./ProductSort";
 
 function CategorySideBar({ categories }) {
  
-  const nam="maede "
-  console.log(nam);
-  
 
   return (
     <>
-      <div className="border-2 border-secondary-100 rounded-tl-4xl overflow-y-auto shadow-md p-4">
-        <ProductFillter categories={categories}/>
-        <ProductSort/>
+      <div className="
+        w-full lg:w-64 xl:w-72
+        bg-secondary-0
+        rounded-lg
+        shadow-lg
+        p-6
+        space-y-8
+        border border-secondary-200
+        overflow-y-auto
+      ">
+        <ProductFillter categories={categories} />
+        <ProductSort />
       </div>
     </>
   );
