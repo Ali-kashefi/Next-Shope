@@ -1,6 +1,7 @@
+import { userPaymentTHeads } from "@/constants/userPaymentTHeads";
 import React from "react";
 import { formatPrice } from "utils/priceFornater";
-import { userPeymentTheads } from "@/constants/tableHead";
+
 
 function TablePayment({ payments }) {
   return (
@@ -10,7 +11,7 @@ function TablePayment({ payments }) {
 
         <thead>
           <tr>
-            {userPeymentTheads.map((item) => (
+            {userPaymentTHeads.map((item) => (
               <th className="table___th" key={item.id}>
                 {item.title}
               </th>

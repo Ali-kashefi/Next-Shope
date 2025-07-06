@@ -1,5 +1,5 @@
 "use client";
-import useGetUser from '@/hook/useGetUser';
+
 import React from 'react'
 
 function TdPeyment({payments}) {

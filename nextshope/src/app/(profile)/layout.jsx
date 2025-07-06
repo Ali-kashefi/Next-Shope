@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import SideBar from "@/components/SideBar";
 import Provider from "app/Provider";
 import Footer from "@/components/ui/Footer";
+import Header from "@/components/Header";
 export const metadata = {
   title: {
     template: "%s|نکست شاپ ",
@@ -19,7 +20,8 @@ export default function RootLayout({ children }) {
         <div className="font-display">
           <Toaster />
           <Provider>
-            <div className="grid grid-cols-4 gap-4 min-h-screen">
+            <Header/>
+            <div className="flex-grow grid grid-cols-4 gap-4 min-h-screen">
               <div className="col-span-1 bg-gray-200 p-4">
                 <SideBar />
               </div>

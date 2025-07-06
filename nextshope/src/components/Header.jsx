@@ -1,11 +1,9 @@
 "use client";
-// The site header displays the number of items and the user's 
-// name if there is a user and a shopping cart.
 import useGetUser from "@/hook/useGetUser";
 
 import Link from "next/link";
 import React from "react";
-import { formatPrice } from "utils/priceFornater";
+// import { formatPrice } from "utils/priceFornater"; 
 
 function Header() {
   const { user, isLoading, cart } = useGetUser();
@@ -13,79 +11,73 @@ function Header() {
   return (
     <>
       <header
-        className={`shadow-lg sticky top-0 transition-all duration-300 bg-white px-8 md:px-16 lg:px-24 ${
-          isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"
-        }`}
+        className={`
+          shadow-xl sticky top-0 z-50 transition-all duration-300
+          bg-gradient-to-r from-blue-600 to-purple-700
+          text-white
+          px-8 md:px-16 lg:px-24 py-4
+          ${isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"}
+        `}
       >
-        <nav className="container mx-auto">
-          <ul className="flex items-center justify-between py-3 text-secondary-900 font-medium">
-            <li className="text-lg font-bold text-primary-600 hover:text-primary-700 transition-all">
-              <Link href="/">خانه</Link>
-            </li>
+        <nav className="container mx-auto flex items-center justify-between h-full">
+          <Link href="/">
+            <span className="text-2xl font-extrabold tracking-wide hover:text-blue-200 transition-colors cursor-pointer">
+              Next Shop
+            </span>
+          </Link>
 
-            <div className="hidden md:flex space-x-8">
-              <li>
-                <Link
-                  className="hover:text-primary-600 transition-all"
-                  href="/products"
-                >
-                  محصولات
-                </Link>
-              </li>
-              {!isLoading && user && user.role === "USER" && (
-                <li>
-                  <Link
-                    className="hover:text-primary-600 transition-all"
-                    href="/profile"
-                  >
-                    پنل کاربر
-                  </Link>
-                </li>
+          <div className="hidden md:flex items-center space-x-8 lg:space-x-12 text-lg">
+            <Link
+              className="hover:text-blue-200 transition-colors duration-200"
+              href="/products"
+            >
+              محصولات
+            </Link>
+            {!isLoading && user && user.role === "USER" && (
+              <Link
+                className="hover:text-blue-200 transition-colors duration-200"
+                href="/profile"
+              >
+                پنل کاربر
+              </Link>
+            )}
+            {!isLoading && user && user.role === "ADMIN" && (
+              <Link
+                className="hover:text-blue-200 transition-colors duration-200"
+                href="/dashboared"
+              >
+                پنل ادمین
+              </Link>
+            )}
+            <Link
+              className="relative flex items-center hover:text-blue-200 transition-colors duration-200"
+              href="/cart"
+            >
+              سبد خرید
+              {cart && cart.payDetail.productIds.length > 0 && (
+                <span className="ml-2 bg-primary-400 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[24px] text-center">
+                  {cart.payDetail.productIds.length}
+                </span>
               )}
-              {!isLoading && user && user.role === "ADMIN" && (
-                <li>
-                  <Link
-                    className="hover:text-primary-600 transition-all"
-                    href="/dashboared"
-                  >
-                    پنل ادمین
-                  </Link>
-                </li>
-              )}
+            </Link>
+          </div>
 
-              <li>
-                <Link
-                  className="relative flex items-center hover:text-primary-600 transition-all"
-                  href="/cart"
-                >
-                  سبد خرید
-                  {cart && cart.payDetail.productIds.length > 0 && (
-                    <span className="ml-2 bg-primary-800 text-white text-xs px-2 py-1 rounded-full">
-                      {formatPrice(cart.payDetail.productIds.length)}
-                    </span>
-                  )}
-                </Link>
-              </li>
-            </div>
-
-            <li className="flex items-center space-x-4">
-              {user ? (
-                <Link href="/profile">
-                  {" "}
-                  <span className="text-primary-800 font-semibold">
-                    {user.name}
-                  </span>
-                </Link>
-              ) : (
-                <Link
-                  className="hover:text-primary-600 transition-all"
-                  href="/signup"
-                >
-                  ورود
-                </Link>
-              )}
-            </li>
-          </ul>
+          <div className="flex items-center space-x-4">
+            {user ? (
+              <Link href="/profile">
+                <span className="text-white hover:text-blue-200 font-semibold transition-colors cursor-pointer">
+                  {user.name}
+                </span>
+              </Link>
+            ) : (
+              <Link
+                className="bg-white text-blue-700 hover:bg-gray-100 px-4 py-2 rounded-full transition-all duration-200 font-semibold shadow-md"
+                href="/signup"
+              >
+                ورود / ثبت‌نام
+              </Link>
+            )}
+          </div>
         </nav>
       </header>
     </>

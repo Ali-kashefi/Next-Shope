@@ -2,7 +2,7 @@
 //Send the number to receive the verification code. If the number
 //  is sent, it will go to the OTP check form. Without changing the URL
 //  and the verification code sent, if it is correct, it will go to the profile
-//  completion stage. Use two components for this: Step status to determine the stage 
+//  completion stage. Use two components for this: Step status to determine the stage
 // in which the user is present. Use React Test to
 
 import CheackOTP from "@/components/CheackOTP";
@@ -19,7 +19,7 @@ function page() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
-  e;
+
   const [time, setTime] = useState(TIMER_BASE);
   const router = useRouter();
 
@@ -33,7 +33,6 @@ function page() {
     mutate: otpmutate,
   } = useMutatecontroler({
     Api: cheackOTPAPI,
-    P,
   });
 
   const phoneNumberHandler = (e) => {
@@ -43,15 +42,15 @@ function page() {
   const sendOTP = async (e) => {
     e.preventDefault();
     try {
-      const res = await mutate({ phoneNumber });
+      const { data } = await mutate({ phoneNumber });
 
-      toast.success(res.message);
+      toast.success(data.message);
       setStep(2);
       setTime(TIMER_BASE);
       setOtp("");
-      console.log(res);
+      console.log(message);
     } catch (err) {
-      toast.error(error.response.data.message);
+      toast.error(error.data.message);
     }
   };
 

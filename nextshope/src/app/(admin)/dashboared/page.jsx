@@ -72,7 +72,7 @@ async function page() {
           <div className="h-64 bg-secondary-50 flex items-center justify-center text-secondary-400 rounded-md">
             <SalesChart
               chartData={chartPreparedData}
-              chartColors={chartColors}
+             
             />{" "}
           </div>
         </div>
