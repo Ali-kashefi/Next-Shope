@@ -4,6 +4,7 @@ import Spiner from "@/components/ui/Spiner";
 import Table from "@/components/ui/Table";
 import { useGetAllorder } from "@/hook/useGetAllorder";
 import React, { useState } from "react";
+import { ConvertToPersianCalendar } from "utils/ConvertToPersianCalendar";
 import { formatPrice } from "utils/priceFornater";
 
 function page() {
@@ -24,28 +25,33 @@ function page() {
         String(order.paymentDate.toLowerCase().includes(lowerCaseQuery))
       );
     }) || [];
+
   const TableHeader = [
     "#",
     "کاربر",
     "شماره فاکتور",
     "محصولات",
-    "قیمت کل",
     "مبلغ کل",
     "تاریخ",
     "وضعیت",
-    "جزییات",
   ];
-  const TableBody = filteredorders.map((order,index) => {
-    const { cart } = order || {};
+
+  console.log(filteredorders);
+
+  const TableBody = filteredorders.map((order, index) => {
     const { user } = order || {};
     return [
-formatPrice(index+1),
-user.name,
-order.invoiceNumber
-
-
-
-
+      formatPrice(index + 1),
+      user.name,
+      order.invoiceNumber,
+      order.description,
+      formatPrice(order.amount),
+      ConvertToPersianCalendar(order.updatedAt),
+      order.status === "COMPLETED" ? (
+        <span className="text-green-600 font-semibold">موفق</span>
+      ) : (
+        <span className="text-red-600 font-semibold">ناموفق</span>
+      ),
     ];
   });
 
