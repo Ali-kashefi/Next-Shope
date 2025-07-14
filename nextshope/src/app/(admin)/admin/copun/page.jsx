@@ -3,15 +3,46 @@ import Spiner from "@/components/ui/Spiner";
 import Table from "@/components/ui/Table";
 import { useGetAllcopun } from "@/hook/useGetAllcopun";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { ConvertToPersianCalendar } from "utils/ConvertToPersianCalendar";
 import { formatPrice } from "utils/priceFornater";
-import { HiEye, HiTrash } from "react-icons/hi";
-import { RiEdit2Line } from "react-icons/ri";
+
 import Button from "@/components/ui/Buttone";
+import EditeButune from "@/components/ui/EditeButune";
+import Modal from "@/components/ui/Modal";
+import { useMutatecontroler } from "@/hook/useMutatecontriler";
+import { deleteCouponAPI } from "@/service/ServicesMethode";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 function page() {
   const { data, isLoading } = useGetAllcopun();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { mutate } = useMutatecontroler({
+    Api: deleteCouponAPI,
+  });
+  const [selectedcopunId, setSelectedcopunId] = useState(null);
   const { coupons } = data || {};
+  const router = useRouter();
+  const RemoveCopun = async () => {
+    try {
+      const { message } = await mutate({ id: selectedcopunId });
+      toast.success(message);
+      router.refresh();
+      setIsModalOpen(false);
+    } catch (error) {
+      console.log(error);
+      toast.error("خطا در حذف محصول.");
+    }
+  };
+  const handleOpenModal = (copunId) => {
+    setSelectedcopunId(copunId);
+    setIsModalOpen(true);
+  };
+
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedcopunId(null);
+  };
   const TableHeader = [
     "#",
     "کد",
@@ -21,12 +52,13 @@ function page() {
     "مقدار مصرفی",
     "ظرفیت",
     "تاریخ انقضا",
-
     "عملیات",
   ];
+
   const TableBody = coupons?.map((coupon, index) => {
     return [
       formatPrice(index + 1),
+      coupon.code,
       coupon.type,
       coupon.amount,
       coupon.productIds?.map((p) => {
@@ -35,17 +67,12 @@ function page() {
       coupon.usageCount,
       coupon.usageLimit,
       ConvertToPersianCalendar(coupon.expireDate),
-      <div className="flex items-center gap-x-4">
-        <Link href={`/admin/coupons/${coupon._id}`}>
-          <HiEye className="text-primary-900 w-6 h-6" />
-        </Link>
-        <button>
-          <HiTrash className="text-rose-600 w-6 h-6" />
-        </button>
-        <Link href={`/admin/coupons/edit/${coupon._id}`}>
-          <RiEdit2Line className="w-6 h-6 text-secondary-600" />
-        </Link>
-      </div>,
+      <EditeButune
+        key={`edit-${coupon._id}`}
+        id={coupon._id}
+        oprnModal={() => handleOpenModal(coupon._id)}
+        editepage={`/admin/copun/edite/${coupon._id}`}
+      />,
     ];
   });
 
@@ -54,26 +81,20 @@ function page() {
   }
   return (
     <div>
+      <Modal
+        onClose={onCloseModal}
+        accept="بله، حذف کن"
+        open={isModalOpen}
+        reject="خیر، انصراف"
+        title="آیا از حذف این تخفیف اطمینان دارید؟ این عمل غیر قابل بازگشت است."
+        onConfirm={RemoveCopun}
+      />
       <div className="gap-2 flex w-auto flex-row pt-8 pb-8 justify-between">
-        {/* <Modal
-          onClose={onCloseModal}
-          accept="بله، حذف کن"
-          open={isModalOpen}
-          reject="خیر، انصراف"
-          title="آیا از حذف این محصول اطمینان دارید؟ این عمل غیر قابل بازگشت است."
-          onConfirm={RemoveProduct}
-        /> */}
         <Link href={`/admin/copun/add`}>
-          <Button className="w-44 h-12">افزودن محصول</Button>
+          <Button className="w-44 h-12">افزودن تخفیف</Button>
         </Link>
-
-        {/* <Search
-          placeholder="جستجوی محصولات"
-          value={searchquery}
-          onChange={(e) => setSearchQuery(e.target.value)} 
-        /> */}
       </div>
-      <Table tHeader={TableHeader} tBody={TableBody}/>
+      <Table tHeader={TableHeader} tBody={TableBody} />
     </div>
   );
 }
