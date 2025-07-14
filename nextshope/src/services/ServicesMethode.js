@@ -126,7 +126,7 @@ export function updateCouponAPI({ id, data }) {
     .then(({ data }) => data.data);
 }
 // Deletes a coupon (admin)
-export function deleteCouponAPI(id) {
+export function deleteCouponAPI({id}) {
   return http
     .delete(`/admin/coupon/remove/${id}`)
     .then(({ data }) => data.data);
