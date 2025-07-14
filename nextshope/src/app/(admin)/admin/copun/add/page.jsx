@@ -1,41 +1,62 @@
 "use client";
 import Button from "@/components/ui/Buttone";
 import Radio from "@/components/ui/Radio";
-import TextField from "@/components/ui/TextField";
+import { faIR } from "date-fns/locale/fa-IR";
 import { useGetallproduct } from "@/hook/getAllProducts";
 import { useMutatecontroler } from "@/hook/useMutatecontriler";
 import { addNewCouponAPI } from "@/service/ServicesMethode";
 import React, { useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
 import Select from "react-select";
+import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
-function page() {
+
+
+
+registerLocale("faIR", faIR);
+
+function Page() {
   const { data } = useGetallproduct();
-  const { isLoading, mutate } = useMutatecontroler({ Api: addNewCouponAPI });
-  const [productIds, setProductIds] = useState([]);
-  const [expireDate, setExpireDate] = useState(new Date());
+  const { products } = data || {};
   const [formData, setFormData] = useState({
     code: "",
     amount: "",
     usageLimit: "",
   });
-  const { products } = data || {};
   const [type, setType] = useState("percent");
-  const onChange = (e) => {
+  const [productIds, setProductIds] = useState([]);
+  const [expireDate, setExpireDate] = useState(new Date());
+  const { isLoading, mutate } = useMutatecontroler({
+    Api: addNewCouponAPI,
+  });
+  const router = useRouter();
+
+  const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { message } = await mutate({
+      const payload = {
         ...formData,
+        amount: Number(formData.amount),
+    usageLimit: Number(formData.usageLimit), 
         type,
-        productIds: productIds.map((id) => {
-          id._id;
-        }),
         expireDate: new Date(expireDate).toISOString(),
-      });
-    } catch (error) {}
+        productIds: productIds.map((p) => p._id),
+      };
+
+      const { message } = await mutate(payload);
+      toast.success(message);
+      router.push("/admin/copun");
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "خطایی رخ داد.");
+    }
   };
+
   return (
     <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg border border-gray-100">
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">
@@ -52,7 +73,7 @@ function page() {
           <input
             id="code"
             name="code"
-            onChange={onChange}
+            onChange={handleFormChange}
             value={formData.code}
             placeholder="کد تخفیف را وارد کنید"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
@@ -64,12 +85,14 @@ function page() {
             className="block text-gray-600 text-sm font-medium mb-2"
             htmlFor="amount"
           >
-            تعداد
+            مقدار
           </label>
           <input
             id="amount"
             name="amount"
-            onChange={onChange}
+            type="number"
+            
+            onChange={handleFormChange}
             value={formData.amount}
             placeholder="مثلاً 10"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
@@ -86,7 +109,9 @@ function page() {
           <input
             id="usageLimit"
             name="usageLimit"
-            onChange={onChange}
+            type="number" 
+    
+            onChange={handleFormChange}
             value={formData.usageLimit}
             placeholder="مثلاً 50"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
@@ -136,22 +161,18 @@ function page() {
           </div>
           <div>
             <span className="mb-2 block">تاریخ انقضا</span>
-            {/* <DatePicker
-              inputClass="textField__input w-[330px]"
-              value={expireDate}
-              format="YYYY/MM/DD"
-              calendar={persian}
-              locale={persian_fa}
-              calendarPosition="bottom-left"
+            <DatePicker
+              locale="faIR"
+              selected={expireDate}
               onChange={(date) => setExpireDate(date)}
-            /> */}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+            />
           </div>
         </div>
 
         <div className="mt-6">
           <Button
             isLoading={isLoading}
-            onClick={handleSubmit}
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200"
           >
@@ -163,4 +184,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
