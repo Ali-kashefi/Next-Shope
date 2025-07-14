@@ -55,7 +55,7 @@ function CartPage() {
       </div>
     );
   }
-
+ 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 bg-background-app-rgb rounded-xl shadow-lg border border-secondary-100">
       <h2 className="text-2xl sm:text-3xl font-extrabold text-secondary-900 mb-6 border-b pb-4">
@@ -69,20 +69,27 @@ function CartPage() {
           </div>
         ))}
 
+
+
       <div className="mt-8 pt-6 border-t border-secondary-200 flex flex-col sm:flex-row justify-between items-center">
         <div className="flex flex-col items-end sm:items-start mb-4 sm:mb-0">
-          <span className="text-secondary-500 line-through text-base sm:text-lg mb-1">
-            {formatPrice(cart.payDetail.totalGrossPrice)} تومان
-          </span>
-
-          <span className="text-error font-medium text-sm sm:text-base mb-1">
-            {formatPrice(cart.payDetail.totalOffAmount)} تومان تخفیف
-          </span>
-
+ {cart.payDetail?.totalOffAmount && (
+  <>
+    <span className="text-secondary-600 font-medium text-sm sm:text-base mb-1">
+      <span className="line-through">{formatPrice(cart.payDetail?.totalPrice) }</span>
+      <span className="mr-2">قیمت بدون تخفیف</span>
+    </span>
+    <span className="text-error font-medium text-sm sm:text-base mb-1">
+      {formatPrice(cart.payDetail?.totalOffAmount) } تومان تخفیف
+    </span>
+  </>
+)}
+  
+         
           <h3 className="font-bold text-primary-900 text-2xl sm:text-3xl">
             مجموع کل:
             <span className="mr-2">
-              {cart?.payDetail ? formatPrice(cart.payDetail.totalPrice) : "---"}
+              {formatPrice(cart.payDetail?.totalGrossPrice) || "---"}
               <span className="text-base sm:text-lg mr-1">تومان</span>
             </span>
           </h3>
@@ -92,7 +99,7 @@ function CartPage() {
           onClick={createpeymenthandler}
           className="mt-6 sm:mt-0 px-8 py-3 bg-primary-700 text-white rounded-lg font-semibold hover:bg-primary-800 transition-colors duration-300 shadow-md"
         >
-          نهایی کردن خرید
+          نهایی کردن خرید{" "}
         </button>
       </div>
     </div>

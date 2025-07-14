@@ -24,6 +24,7 @@ async function  Productslug({ params }) {
 
 
 
+
     return (
         <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8 flex items-center justify-center">
             <div className="bg-white rounded-lg shadow-xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
@@ -59,9 +60,9 @@ async function  Productslug({ params }) {
                             <span className="text-primary-700 text-3xl font-bold">
                                 {finalPrice.toLocaleString('fa-IR')} تومان
                             </span>
-                            {hasDiscount && (
+                            {product.offPrice && (
                                 <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
-                                    %{product.discount} تخفیف!
+                                    %{product.offPrice} تخفیف!
                                 </span>
                             )}
                         </div>

@@ -1,12 +1,12 @@
 "use client";
 
-
 import { useGetallcategory } from "@/hook/useGetallcategory";
 import { useMutatecontroler } from "@/hook/useMutatecontriler";
 import { createProductAPI } from "@/service/ServicesMethode";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import PrpductForm from "@/components/PrpductForm";
+;
 
 function page() {
   const [tags, setTags] = useState([]);
@@ -34,6 +34,12 @@ function page() {
   const handChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  useEffect(()=>{
+
+  },[formData])
+ 
+ 
+
   const handleSubmite = async (e) => {
     e.preventDefault();
 
@@ -46,9 +52,10 @@ function page() {
       });
       toast.success(message);
     } catch (error) {
-toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
     }
   };
+
   return (
     <div>
       <PrpductForm
@@ -60,7 +67,7 @@ toast.error(error?.response?.data?.message);
         productDataOnChange={handChange}
         productform={formData}
         submiteForm={handleSubmite}
-      isLoading={isLoading}
+        isLoading={isLoading}
       />
     </div>
   );

@@ -9,6 +9,7 @@ function TextField({
   error,
   label,
   value,
+  readOnly,
 
   disabled,
 }) {
@@ -25,6 +26,8 @@ function TextField({
         onChange={onChange}
         disabled={disabled}
         placeholder={placeholder}
+        readOnly={readOnly || false}
+        
         className="  block
         
     w-full

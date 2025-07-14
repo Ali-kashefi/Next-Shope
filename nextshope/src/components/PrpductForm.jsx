@@ -53,34 +53,45 @@ function PrpductForm({
       name: "price",
       lable: "قیمت",
       placeholder: "قیمت محصول",
-      type: "text",
+      type: "number",
     },
     {
       id: 6,
       name: "discount",
       lable: "تخفیف",
-      placeholder: "تخفیف محصول",
-      type: "text",
+      placeholder: "تخفیف محصول (درصد)",
+      type: "number",
     },
-
     {
       id: 7,
-      name: "countInStock",
-      lable: " موجودی اولیه ",
-      placeholder: "موجودی فعلی  ",
-      type: "text",
+      name: "offPrice",
+      lable: "قیمت با تخفیف",
+      placeholder: "به صورت خودکار محاسبه می شود",
+      type: "number",
+      readOnly: true,
     },
     {
       id: 8,
+      name: "countInStock",
+      lable: "موجودی اولیه",
+      placeholder: "موجودی فعلی",
+      type: "number",
+    },
+    {
+      id: 9,
       name: "imageLink",
-      lable: " عکس محصول ",
-      placeholder: "  لینک عکس محصول را وارد کنید ",
+      lable: "عکس محصول",
+      placeholder: "لینک عکس محصول را وارد کنید",
       type: "text",
     },
   ];
+
   if (isLoading) {
     return <div>loading</div>;
   }
+
+ 
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-xl w-auto">
@@ -97,6 +108,7 @@ function PrpductForm({
               value={productform[item.name]}
               onChange={productDataOnChange}
               type={item.type}
+              readOnly={item.readOnly || false}
               className="w-full px-4 py-3 text-right border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               labelClassName="block text-gray-700 text-sm font-medium mb-2"
             />

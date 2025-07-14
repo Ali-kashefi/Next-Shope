@@ -27,7 +27,7 @@ function Product({ product }) {
             {product.category.title}
           </p>
 
-          Example: <p className="text-lg font-semibold text-primary-600 mt-2">{formatPrice(product.price)}</p>
+          <p className="text-lg font-semibold text-primary-600 mt-2">{formatPrice(product.price)}</p>
         </div>
       </div>
     </Link>

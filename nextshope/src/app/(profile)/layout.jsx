@@ -21,12 +21,12 @@ export default function RootLayout({ children }) {
           <Toaster />
           <Provider>
             <Header/>
-            <div className="flex-grow grid grid-cols-4 gap-4 min-h-screen">
-              <div className="col-span-1 bg-gray-200 p-4">
+            <div className="flex-grow grid grid-cols-4   gap-4 min-h-screen">
+              <div className="col-span-1 xl:col-span-2 bg-gray-200 p-4">
                 <SideBar />
               </div>
 
-              <div className="col-span-3 bg-white p-4">
+              <div className="col-span-2 bg-white p-4">
                 {children}
               </div>
             </div>

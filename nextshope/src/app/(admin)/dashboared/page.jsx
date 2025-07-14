@@ -90,7 +90,7 @@ async function page() {
                 >
                   <span>سفارش {order._id.slice(8, 15)}</span>
                   <span className="text-primary-600 font-medium">
-                    {order.cart.payDetail.totalPrice} تومان
+                    {order.cart.payDetail.totalPrice } تومان
                   </span>
                 </li>
               );

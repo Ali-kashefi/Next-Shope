@@ -15,6 +15,7 @@ function AddtoCart({ product }) {
   const { error, mutate, isLoading } = useMutatecontroler({
     Api: addToCartAPI,
   });
+
   const router = useRouter();
   const queryclient = useQueryClient();
 
@@ -22,6 +23,7 @@ function AddtoCart({ product }) {
     if (!user) {
       toast.error("لطفا ابتدا وارد شوید");
       router.push("/signup");
+      return;
     }
     try {
       const { message } = await mutate(product._id);
@@ -35,7 +37,7 @@ function AddtoCart({ product }) {
   };
   const isCart = (user, product) => {
     if (!user) return false;
-    return user.cart.products.some((p) => p.productId === product._id);
+    return user.cart?.products.some((p) => p.productId === product._id);
   };
 
   return (
