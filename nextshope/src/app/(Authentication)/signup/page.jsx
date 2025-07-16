@@ -48,7 +48,7 @@ function page() {
       setStep(2);
       setTime(TIMER_BASE);
       setOtp("");
-      console.log(message);
+
     } catch (err) {
       toast.error(error.data.message);
     }

@@ -12,12 +12,12 @@ import { cookies } from "next/headers";
 import { toStringcookie } from "utils/toStringCookie";
 
 async function Page({ searchParams }) {
-  console.log(searchParams);
+
 
   
 const cookieStore = await cookies();
 const options = toStringcookie(cookieStore);
-console.log(options);
+
 
   const getallCategorys = getallCategorysAPI();
   const getallproducts = getallproductsAPI(queryString.stringify(searchParams));

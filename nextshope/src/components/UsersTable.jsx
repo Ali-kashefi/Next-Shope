@@ -7,7 +7,7 @@ import useGetUser from "@/hook/useGetUser";
 import Spiner from "./ui/Spiner";
 
 function UsersTable() {
-  // --- تمام هوک‌ها باید اینجا، در بالاترین سطح کامپوننت، قرار بگیرند ---
+
   const { data: currentUserData, isLoading: isUserLoading } = useGetUser();
   const currentUserRole = currentUserData?.user?.role;
 
@@ -22,7 +22,7 @@ function UsersTable() {
         setUsersListError(null);
         try {
           const { data } = await getallusersAPI();
-          console.log(data);
+       
           setUsers(data.users || []);
           setHasFetchedUsers(true);
         } catch (err) {

@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Provider from "../Provider";
 import Header from "@/components/Header";
 import AdminSidebar from "@/components/AdminSidbar";
-import Footer from "@/components/ui/Footer";
+
 export const metadata = {
   title: {
     template: '%s|نکست شاپ ',
@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
 
                 {children}
             </div>
-            <Footer/>
+   
           </div>
         </Provider>
 

@@ -6,6 +6,7 @@ import Table from "@/components/ui/Table";
 import useGetallusers from "@/hook/useGetallusers";
 import React, { useState } from "react";
 import { formatPrice } from "utils/priceFornater";
+
 function Page() {
   const { data, error, isLoading } = useGetallusers();
   const { users: allUsers } = data || {};
@@ -19,10 +20,9 @@ function Page() {
       }
       const lowerCaseQuery = searchQuery.toLowerCase();
       return (
-        user.name.toLowerCase().includes(lowerCaseQuery) ||
-        user.email.toLowerCase().includes(lowerCaseQuery)||
-         user.phoneNumber.toLowerCase().includes(lowerCaseQuery)
-
+        user.name?.toLowerCase().includes(lowerCaseQuery) ||
+        user.email?.toLowerCase().includes(lowerCaseQuery) ||
+        user.phoneNumber?.toLowerCase().includes(lowerCaseQuery)
       );
     }) || [];
 
@@ -45,18 +45,16 @@ function Page() {
     "موبایل",
     "تاریخ ثبت نام",
     "وضعیت",
-   
   ];
 
   const tBody = filteredUsers.map((user, index) => {
     return [
       formatPrice(index + 1),
-      user.name,
-      user.email,
-      user.phoneNumber,
+      user.name || '-',
+      user.email || '-',
+      user.phoneNumber || '-',
       new Date(user.createdAt).toLocaleDateString("fa-IR"),
       user.role === "ADMIN" ? "ادمین" : "کاربر عادی",
-     
     ];
   });
 

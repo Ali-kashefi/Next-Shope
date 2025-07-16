@@ -5,6 +5,7 @@ import SideBar from "@/components/SideBar";
 import Provider from "app/Provider";
 import Footer from "@/components/ui/Footer";
 import Header from "@/components/Header";
+
 export const metadata = {
   title: {
     template: "%s|نکست شاپ ",
@@ -17,20 +18,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <div className="font-display">
+        <div className="font-display flex flex-col min-h-screen">
           <Toaster />
           <Provider>
-            <Header/>
-            <div className="flex-grow grid grid-cols-4   gap-4 min-h-screen">
-              <div className="col-span-1 xl:col-span-2 bg-gray-200 p-4">
+            <Header />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 min-h-screen">
+              <div className="md:col-span-1 p-4">
                 <SideBar />
               </div>
-
-              <div className="col-span-2 bg-white p-4">
+              <main className="md:col-span-3 p-4 bg-white overflow-y-auto">
                 {children}
-              </div>
+              </main>
             </div>
-                <Footer />
+            <Footer />
           </Provider>
         </div>
       </body>

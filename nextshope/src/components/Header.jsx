@@ -55,7 +55,7 @@ function Header() {
             >
               سبد خرید
               {cart && cart.payDetail.productIds.length > 0 && (
-                <span className="ml-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] h-5 flex items-center justify-center"> {/* ابعاد و رنگ بهبود یافته برای نشان سبد خرید */}
+                <span className="ml-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] h-5 flex items-center justify-center"> 
                   {cart.payDetail.productIds.length}
                 </span>
               )}
@@ -65,13 +65,13 @@ function Header() {
           <div className="flex items-center space-x-4">
             {user ? (
               <Link href="/profile">
-                <span className="text-blue-700 hover:text-blue-500 font-semibold transition-colors cursor-pointer"> {/* رنگ متن نام کاربری */}
+                <span className="text-blue-700 hover:text-blue-500 font-semibold transition-colors cursor-pointer">
                   {user.name}
                 </span>
               </Link>
             ) : (
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 px-5 py-2.5 rounded-full transition-all duration-200 font-semibold shadow-md" // دکمه ورود/ثبت‌نام با رنگ اصلی و افکت هاور جذاب
+                className="bg-blue-600 text-white hover:bg-blue-700 px-5 py-2.5 rounded-full transition-all duration-200 font-semibold shadow-md" 
                 href="/signup"
               >
                 ورود / ثبت‌نام

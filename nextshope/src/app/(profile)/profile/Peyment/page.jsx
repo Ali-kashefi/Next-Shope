@@ -8,9 +8,7 @@ import React from "react";
 function PeymentPage() {
   const { data, user, isLoading } = useGetUser();
   const { payments } = data || {};
-  if (!isLoading) {
-    console.log(payments);
-  }
+  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-48">

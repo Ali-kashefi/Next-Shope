@@ -63,8 +63,7 @@ function categoriespage() {
   const handleOpenModal = (categoriesId) => {
     setSelectedcategoriesId(categoriesId);
     setIsModalOpen(true);
-    console.log(categoriesId);
-    
+      
   };
 
   const onCloseModal = () => {

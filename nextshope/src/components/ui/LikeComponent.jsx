@@ -18,12 +18,12 @@ function Like({ product }) {
   const router = useRouter();
   const likeHandler = async () => {
     try {
-      // const { message } = await mutate(product._id);
+      
       const { message } = await likeAPI(product._id);
       toast.success(message);
       router.refresh(pathname + "?" + searchParams.toString());
     
-      console.log(product.isLiked);
+
       
     } catch (error) {
       if (error?.response?.data) {

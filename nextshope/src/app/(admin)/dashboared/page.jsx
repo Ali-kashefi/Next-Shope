@@ -28,7 +28,7 @@ async function page() {
     }, 0);
   }
 
-  console.log("مجموع کل قیمت‌ها:", totalGrossPriceSum);
+
 
   return (
     <div className="min-h-screen bg-app-background p-6 lg:p-8">

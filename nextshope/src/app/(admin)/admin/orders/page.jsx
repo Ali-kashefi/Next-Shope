@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { ConvertToPersianCalendar } from "utils/ConvertToPersianCalendar";
 import { formatPrice } from "utils/priceFornater";
 
-function page() {
+function Page() {
   const [searchquery, setSearchQuery] = useState("");
 
   const { data, error, isLoading } = useGetAllorder();
@@ -19,10 +19,15 @@ function page() {
         return true;
       }
       const lowerCaseQuery = searchquery.toLowerCase();
+
+      const userName = order.user?.name?.toLowerCase() || '';
+      const orderAmount = String(order.amount || '').toLowerCase();
+      const orderDate = ConvertToPersianCalendar(order.updatedAt || '').toLowerCase();
+
       return (
-        order.user.name.toLowerCase().includes(lowerCaseQuery) ||
-        String(order.amount.toLowerCase().includes(lowerCaseQuery)) ||
-        String(order.paymentDate.toLowerCase().includes(lowerCaseQuery))
+        userName.includes(lowerCaseQuery) ||
+        orderAmount.includes(lowerCaseQuery) ||
+        orderDate.includes(lowerCaseQuery)
       );
     }) || [];
 
@@ -36,16 +41,14 @@ function page() {
     "وضعیت",
   ];
 
-  console.log(filteredorders);
-
   const TableBody = filteredorders.map((order, index) => {
     const { user } = order || {};
     return [
       formatPrice(index + 1),
-      user.name,
-      order.invoiceNumber,
-      order.description,
-      formatPrice(order.amount),
+      user?.name || '-',
+      order.invoiceNumber || '-',
+      order.description || '-',
+      formatPrice(order.amount || 0),
       ConvertToPersianCalendar(order.updatedAt),
       order.status === "COMPLETED" ? (
         <span className="text-green-600 font-semibold">موفق</span>
@@ -56,8 +59,13 @@ function page() {
   });
 
   if (isLoading) {
-    <Spiner />;
+    return <Spiner />;
   }
+
+  if (error) {
+    return <div className="text-red-500 text-center mt-8">خطا در بارگذاری اطلاعات: {error.message || 'خطای ناشناخته'}</div>;
+  }
+
   return (
     <div className="gap-2 flex w-auto flex-col pt-8 pb-8 justify-between ">
       <Search
@@ -71,4 +79,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
