@@ -6,7 +6,7 @@ import Spiner from "@/components/ui/Spiner";
 import { useGetallcategory } from "@/hook/useGetallcategory";
 import { useGetproductByid } from "@/hook/useGetproducts";
 import {} from "utils/priceFornater";
-import { Discountcalculation } from "utils/Discountcalculation";
+
 import { useMutatecontroler } from "@/hook/useMutatecontriler";
 import { updateProductAPI } from "@/service/ServicesMethode";
 import toast from "react-hot-toast";
@@ -64,14 +64,7 @@ const router=useRouter();
     }
   }, [product]);
 
-  useEffect(() => {
-    const allprice = Discountcalculation(formData.price);
-    const discount = Discountcalculation(formData.discount);
-
-    const calculatedOffPrice = allprice - allprice * (discount / 100);
-    setOfprice(calculatedOffPrice);
-  }, [formData.price, formData.discount]);
-
+ 
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
