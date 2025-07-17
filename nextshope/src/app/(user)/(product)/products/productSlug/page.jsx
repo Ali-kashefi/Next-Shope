@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 
 import ProductFillter from "./ProductFillter";
 import ProductSort from "./ProductSort";
+import Spiner from "@/components/ui/Spiner";
 
 
 function CategorySideBar({ categories }) {
@@ -21,8 +22,10 @@ function CategorySideBar({ categories }) {
         border border-secondary-200
         overflow-y-auto
       ">
+        <Suspense fallback={<Spiner/>}>
         <ProductFillter categories={categories} />
         <ProductSort />
+        </Suspense>
       </div>
     </>
   );

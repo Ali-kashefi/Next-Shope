@@ -47,7 +47,7 @@ function AddtoCart({ product }) {
           <Button
             isLoading={isLoading}
             children="سبد خرید"
-            className="bg-primary-700 bg-primary-800 w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold transition-colors duration-300"
+            className=" bg-primary-800 w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold transition-colors duration-300"
           />
         </Link>
       ) : (
@@ -58,7 +58,7 @@ function AddtoCart({ product }) {
           children={product.countInStock > 0 ? "افزودن به سبد خرید" : "ناموجود"}
           className={`w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold transition-colors duration-300 ${
             product.countInStock > 0
-              ? "bg-primary-700 bg-primary-800"
+              ? " bg-primary-800"
               : "bg-gray-400 cursor-not-allowed"
           }`}
         />

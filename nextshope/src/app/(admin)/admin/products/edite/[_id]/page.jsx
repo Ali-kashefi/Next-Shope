@@ -10,10 +10,11 @@ import {} from "utils/priceFornater";
 import { useMutatecontroler } from "@/hook/useMutatecontriler";
 import { updateProductAPI } from "@/service/ServicesMethode";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+
 
 function ProductEditPage({ params }) {
-  const { _id } = React.use(params);
+  const { _id } = useParams();
 
   const [formData, setFormData] = useState({
     title: "",
