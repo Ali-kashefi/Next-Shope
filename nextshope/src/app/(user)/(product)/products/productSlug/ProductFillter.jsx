@@ -38,21 +38,22 @@ function ProductFillter({ categories }) {
     }
   };
   return (
-    <>
-      <h1>صفحه محصولات </h1>
-      <h2>دسته بندی</h2>
-      {categories?.map((data) => (
-        <CheckBox
-          key={data._id}
-          id={data._id}
-          value={data.englishTitle}
-          name="category-type"
-          checked={selectedCategories.includes(data.englishTitle)}
-          label={data.title}
-          onChange={categoryHandler}
-        />
-      ))}
-    </>
+    <div className="flex flex-col gap-y-4">
+      <h2 className="text-sm font-bold">دسته‌بندی</h2>
+      <div className="space-y-2">
+        {categories?.map((data) => (
+          <CheckBox
+            key={data._id}
+            id={data._id}
+            value={data.englishTitle}
+            name="category-type"
+            checked={selectedCategories.includes(data.englishTitle)}
+            label={data.title}
+            onChange={categoryHandler}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
