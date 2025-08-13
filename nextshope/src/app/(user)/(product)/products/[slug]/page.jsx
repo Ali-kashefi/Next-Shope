@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import AddtoCart from "./AddtoCart";
 import Image from "next/image";
 import Spiner from "@/components/ui/Spiner";
+import { formatPrice } from "utils/priceFornater";
 
 async function Productslug({ params }) {
   const { slug } = params;
@@ -49,21 +50,21 @@ async function Productslug({ params }) {
               {product.description}
             </p>
 
-            <div className="mb-6 flex items-baseline">
-              {hasDiscount && (
-                <span className="text-gray-500 line-through text-lg ml-3">
-                  {product.price.toLocaleString("fa-IR")} تومان
-                </span>
-              )}
-              <span className="text-primary-700 text-3xl font-bold">
-                {finalPrice.toLocaleString("fa-IR")} تومان
-              </span>
-              {product.offPrice && (
-                <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
-                  %{product.offPrice} تخفیف!
-                </span>
-              )}
-            </div>
+            <div className="mb-6 flex flex-row items-baseline">
+    {hasDiscount && (
+        <span className="text-gray-500 flex flex-row line-through text-lg ml-3">
+            {product.price.toLocaleString("fa-IR")} تومان
+        </span>
+    )}
+    <span className="text-primary-700 flex flex-row text-3xl font-bold">
+        {finalPrice.toLocaleString("fa-IR")} تومان
+    </span>
+    {product.offPrice && (
+        <span className="bg-red-100 text-red-800 flex flex-row text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+            {formatPrice(product.offPrice)} تخفیف!
+        </span>
+    )}
+</div>
 
             <div className="text-gray-700 mb-4">
               <p>
