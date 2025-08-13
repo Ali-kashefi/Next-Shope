@@ -13,7 +13,7 @@ function CategorySideBar({ categories }) {
   return (
     <>
       <div className="
-        w-full lg:w-64 xl:w-72
+        w-full 
         bg-secondary-0
         rounded-lg
         shadow-lg
