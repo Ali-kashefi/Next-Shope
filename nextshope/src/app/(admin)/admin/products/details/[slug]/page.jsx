@@ -5,8 +5,9 @@ import { getOneproductBySlugAPI } from "@/service/ServicesMethode";
 import Image from "next/image";
 import { formatPrice } from "utils/priceFornater";
 import { useMutatecontroler } from "@/hook/useMutatecontriler";
+import { useParams } from "next/navigation";
 function ProductDetailsPage({ params }) {
-  const { slug } = React.use(params);
+  const { slug } = useParams();
   const { data, error, isLoading, mutate } = useMutatecontroler({
     Api: getOneproductBySlugAPI,
   });
