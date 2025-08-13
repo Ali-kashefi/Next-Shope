@@ -53,12 +53,12 @@ function Page() {
     try {
       const { message } = await mutate({ name, email });
 
-      toast.success(message);
+      toast.success("به نکست شاپ خوش امدید");
 
       router.push("/");
       queryclient.invalidateQueries({ queryKey: ["get-user"] });
     } catch (err) {
-      toast.error(error.response.data.message);
+      toast.error(err.message ||"خطایی رخ داده");
     }
   };
 
@@ -70,7 +70,7 @@ function Page() {
             <TextField
               type="text"
               placeholder="نام خود را وارد کنید"
-              label="نام:"
+              label="نام"
               name="name"
               value={name}
               onChange={nemaHndler}
@@ -78,7 +78,7 @@ function Page() {
 
             <TextField
               className="bg-primary-50 "
-              label="ایمیل:"
+              label="ایمیل"
               placeholder="ایمیل خود را وارد کنید"
               name="email"
               type="email"
