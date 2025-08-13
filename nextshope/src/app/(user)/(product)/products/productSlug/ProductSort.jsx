@@ -26,10 +26,10 @@ function ProductSort() {
     setSort(searchParams.get("sort") || "");
   }, [searchParams]);
   return (
-    <>
-      <h2>مرتب سازی </h2>
-      {optionSort.map((i) => {
-        return (
+    <div className="flex flex-col gap-y-4">
+      <h2 className="text-sm font-bold">مرتب‌سازی</h2>
+      <div className="space-y-2">
+        {optionSort.map((i) => (
           <Radio
             key={i.id}
             id={i.id}
@@ -39,9 +39,9 @@ function ProductSort() {
             checked={sort === i.value || ""}
             onChange={sortHandler}
           />
-        );
-      })}
-    </>
+        ))}
+      </div>
+    </div>
   );
 }
 
